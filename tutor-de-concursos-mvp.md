@@ -132,11 +132,11 @@ Antes de começar a Fase 0, liste os arquivos que pretende criar e as dúvidas q
 - [x] Renderizar Markdown nas respostas
 
 ### Fase 6: Dashboard
-- [ ] Query: taxa de acerto geral e por matéria
-- [ ] Gráfico de evolução dos últimos 30 dias (linha)
-- [ ] Gráfico de acertos por matéria (barras)
-- [ ] Lista das últimas sessões com link para revisar
-- [ ] Estado vazio para quem ainda não resolveu nada
+- [x] Query: taxa de acerto geral e por matéria
+- [x] Gráfico de evolução dos últimos 30 dias (linha)
+- [x] Gráfico de acertos por matéria (barras)
+- [x] Lista das últimas sessões com link para revisar
+- [x] Estado vazio para quem ainda não resolveu nada
 
 ### Fase 7: Polimento e deploy
 - [ ] Rate limit nas rotas de IA com Upstash (por usuário)
