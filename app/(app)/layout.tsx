@@ -106,7 +106,7 @@ function Navbar() {
               letterSpacing: "-0.01em",
             }}
           >
-            Tutor de Concursos
+            Gabarita.AI
           </span>
         </Link>
 
@@ -160,7 +160,6 @@ function Navbar() {
                 },
               },
             }}
-            afterSignOutUrl="/"
           />
         </nav>
       </div>
@@ -172,4 +171,5 @@ const navLinks = [
   { href: "/dashboard", icon: "📊", label: "Dashboard" },
   { href: "/praticar",  icon: "🎯", label: "Praticar"  },
   { href: "/tutor",     icon: "🤖", label: "Tutor"     },
+  { href: "/perfil",    icon: "👤", label: "Perfil"    },
 ];

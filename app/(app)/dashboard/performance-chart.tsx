@@ -48,7 +48,7 @@ export default function PerformanceChart({ data }: PerformanceChartProps) {
           />
           <Tooltip
             contentStyle={{ borderRadius: '8px', border: '1px solid #E5E7EB', boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)' }}
-            formatter={(value: number) => [`${value.toFixed(1)}%`, 'Taxa de Acerto']}
+            formatter={(value: any) => [`${Number(value).toFixed(1)}%`, 'Taxa de Acerto']}
             labelStyle={{ color: '#374151', fontWeight: 600, marginBottom: '4px' }}
           />
           <Line

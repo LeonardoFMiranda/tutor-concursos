@@ -165,6 +165,10 @@ export default function ChatInterface({
             <PaperPlaneRight size={20} weight="fill" />
           </button>
         </form>
+        <p className="text-center text-xs text-gray-400 mt-3 max-w-3xl mx-auto px-4">
+          Questões e explicações geradas por IA podem conter imprecisões ou estar desatualizadas. 
+          Confira sempre a legislação e os editais oficiais.
+        </p>
       </div>
     </div>
   );

@@ -139,12 +139,12 @@ Antes de começar a Fase 0, liste os arquivos que pretende criar e as dúvidas q
 - [x] Estado vazio para quem ainda não resolveu nada
 
 ### Fase 7: Polimento e deploy
-- [ ] Rate limit nas rotas de IA com Upstash (por usuário)
-- [ ] Skeletons, páginas `error.tsx` e `not-found.tsx`
-- [ ] Revisar responsividade no celular
-- [ ] Aviso visível: "Questões geradas por IA podem conter erros. Confira a legislação oficial."
-- [ ] Deploy na Vercel com variáveis de ambiente
-- [ ] README com problema, solução, stack, decisões técnicas, prints e GIF
+- [x] Rate limit nas rotas de IA com Upstash (por usuário)
+- [x] Skeletons, páginas `error.tsx` e `not-found.tsx`
+- [x] Revisar responsividade no celular
+- [x] Aviso visível: "Questões geradas por IA podem conter erros. Confira a legislação oficial."
+- [x] Deploy na Vercel com variáveis de ambiente
+- [x] README com problema, solução, stack, decisões técnicas, prints e GIF
 - [ ] Link do projeto no ar no portfólio
 
 ---
