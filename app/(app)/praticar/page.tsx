@@ -40,6 +40,11 @@ export default async function PraticarPage() {
           subjects={profile.subjects}
         />
       </div>
+
+      <p className="text-center text-xs text-gray-400 mt-6 max-w-2xl mx-auto">
+        Questões e explicações geradas por IA podem conter imprecisões ou estar desatualizadas. 
+        Confira sempre a legislação e os editais oficiais.
+      </p>
     </div>
   );
 }

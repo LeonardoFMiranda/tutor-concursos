@@ -160,7 +160,6 @@ function Navbar() {
                 },
               },
             }}
-            afterSignOutUrl="/"
           />
         </nav>
       </div>

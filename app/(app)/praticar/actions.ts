@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { generateQuestionsSchema } from "@/lib/validations/schemas";
 import { generateQuestions } from "@/lib/ai/generate-questions";
+import { questionsRatelimit } from "@/lib/ratelimit";
 import { Banca, Difficulty, QuestionStyle } from "@prisma/client";
 
 export async function generatePracticeSessionAction(formData: FormData) {
@@ -12,6 +13,14 @@ export async function generatePracticeSessionAction(formData: FormData) {
 
   if (!userId) {
     return { success: false, error: "Usuário não autenticado." };
+  }
+
+  const { success: rateLimitSuccess } = await questionsRatelimit.limit(userId);
+  if (!rateLimitSuccess) {
+    return {
+      success: false,
+      error: "Você atingiu o limite diário de gerações. Tente novamente amanhã.",
+    };
   }
 
   const subject = formData.get("subject") as string;
@@ -31,7 +40,7 @@ export async function generatePracticeSessionAction(formData: FormData) {
   if (!validationResult.success) {
     return {
       success: false,
-      error: validationResult.error.errors[0].message,
+      error: validationResult.error.issues[0].message,
     };
   }
 

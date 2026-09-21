@@ -56,8 +56,8 @@ export default function SubjectAccuracyChart({ data }: SubjectAccuracyChartProps
           <Tooltip
             cursor={{ fill: '#F3F4F6' }}
             contentStyle={{ borderRadius: '8px', border: '1px solid #E5E7EB', boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)' }}
-            formatter={(value: number, name: string, props: any) => [
-              `${value.toFixed(1)}% (${props.payload.total} questões)`,
+            formatter={(value: any, name: any, props: any) => [
+              `${Number(value).toFixed(1)}% (${props.payload.total} questões)`,
               'Taxa de Acerto'
             ]}
             labelStyle={{ color: '#374151', fontWeight: 600, marginBottom: '4px' }}

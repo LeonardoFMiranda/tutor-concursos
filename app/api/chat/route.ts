@@ -3,12 +3,18 @@ import { streamText } from "ai";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 import { MessageRole } from "@prisma/client";
+import { chatRatelimit } from "@/lib/ratelimit";
 
 export async function POST(req: Request) {
   const { userId } = await auth();
 
   if (!userId) {
     return new Response("Não autorizado", { status: 401 });
+  }
+
+  const { success: rateLimitSuccess } = await chatRatelimit.limit(userId);
+  if (!rateLimitSuccess) {
+    return new Response("Você atingiu o limite de mensagens do tutor por dia.", { status: 429 });
   }
 
   const { messages, data } = await req.json();
