@@ -105,22 +105,22 @@ Antes de começar a Fase 0, liste os arquivos que pretende criar e as dúvidas q
 - [x] Redirecionar para onboarding se o perfil não existir
 
 ### Fase 3: Geração de questões
-- [ ] Definir schema Zod da questão (enunciado, opções, gabarito, explicação)
-- [ ] Criar `lib/ai/generate-questions.ts` com `generateObject`
-- [ ] Escrever o system prompt do gerador (com variações CEBRASPE x múltipla escolha)
-- [ ] Página `/praticar` com formulário (matéria, assunto, banca, dificuldade, quantidade)
-- [ ] Server Action: gera, salva `PracticeSession` + `Question`s e redireciona
-- [ ] Loading state durante a geração
-- [ ] Tratamento de erro e retry
+- [x] Definir schema Zod da questão (enunciado, opções, gabarito, explicação)
+- [x] Criar `lib/ai/generate-questions.ts` com `generateObject`
+- [x] Escrever o system prompt do gerador (com variações CEBRASPE x múltipla escolha)
+- [x] Página `/praticar` com formulário (matéria, assunto, banca, dificuldade, quantidade)
+- [x] Server Action: gera, salva `PracticeSession` + `Question`s e redireciona
+- [x] Loading state durante a geração
+- [x] Tratamento de erro e retry
 
 ### Fase 4: Resolução
-- [ ] Página `/praticar/[sessionId]` com uma questão por vez
-- [ ] Componente de questão (múltipla escolha e certo/errado)
-- [ ] Ao confirmar: salvar `Attempt`, mostrar acerto/erro, gabarito e explicação
-- [ ] Barra de progresso da sessão
-- [ ] Tela de resultado final (acertos, erros, botão para refazer ou nova sessão)
-- [ ] Botão "Reportar problema" (marca `reported = true`)
-- [ ] Botão "Não entendi" que abre o tutor com a questão como contexto
+- [x] Página `/praticar/[sessionId]` com uma questão por vez
+- [x] Componente de questão (múltipla escolha e certo/errado)
+- [x] Ao confirmar: salvar `Attempt`, mostrar acerto/erro, gabarito e explicação
+- [x] Barra de progresso da sessão
+- [x] Tela de resultado final (acertos, erros, botão para refazer ou nova sessão)
+- [x] Botão "Reportar problema" (marca `reported = true`)
+- [x] Botão "Não entendi" que abre o tutor com a questão como contexto
 
 ### Fase 5: Tutor
 - [ ] Route Handler `/api/chat` com `streamText`
