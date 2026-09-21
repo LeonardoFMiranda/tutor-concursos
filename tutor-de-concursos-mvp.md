@@ -99,10 +99,10 @@ Antes de começar a Fase 0, liste os arquivos que pretende criar e as dúvidas q
 - [ ] Layout autenticado com navbar e menu do usuário
 
 ### Fase 2: Onboarding
-- [ ] Página `/onboarding` com formulário (concurso, banca, matérias)
-- [ ] Validação com Zod
-- [ ] Server Action para salvar o `Profile`
-- [ ] Redirecionar para onboarding se o perfil não existir
+- [x] Página `/onboarding` com formulário (concurso, banca, matérias)
+- [x] Validação com Zod
+- [x] Server Action para salvar o `Profile`
+- [x] Redirecionar para onboarding se o perfil não existir
 
 ### Fase 3: Geração de questões
 - [ ] Definir schema Zod da questão (enunciado, opções, gabarito, explicação)

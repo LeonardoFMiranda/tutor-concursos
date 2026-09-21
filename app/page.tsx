@@ -1,254 +1,157 @@
 import Link from "next/link";
 import { Show } from "@clerk/nextjs";
+import {
+  Books,
+  Target,
+  CheckCircle,
+  Robot,
+  ChartLineUp,
+  Faders,
+  WarningCircle,
+  User,
+  ArrowRight,
+} from "@phosphor-icons/react/dist/ssr";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-dvh flex flex-col">
-      {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <header
-        style={{
-          backgroundColor: "var(--color-primary)",
-          boxShadow: "var(--shadow-md)",
-        }}
-      >
-        <div className="gov-container flex items-center justify-between py-4">
+    <div className="min-h-dvh flex flex-col font-sans text-gray-800">
+      {/* ── Barra Brasil (Placeholder) ─────────────────────────────────────── */}
+      <div className="bg-[#f2f2f2] border-b border-[#e6e6e6] text-[#333] text-xs font-bold py-1 px-4 sm:px-8">
+        <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+          <span>BRASIL</span>
+          <span className="hidden sm:inline">
+            Acesso à informação | Participe | Legislação | Órgãos do Governo
+          </span>
+        </div>
+      </div>
+
+      {/* ── Header Principal ───────────────────────────────────────────────── */}
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-[1200px] mx-auto flex items-center justify-between py-6 px-4 sm:px-8">
           <div className="flex items-center gap-3">
-            {/* Ícone estilizado */}
-            <div
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "var(--radius-md)",
-                backgroundColor: "rgba(255,255,255,0.15)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span style={{ fontSize: "1.3rem" }}>📋</span>
-            </div>
-            <span
-              style={{
-                color: "white",
-                fontWeight: 700,
-                fontSize: "var(--font-size-lg)",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Tutor de Concursos
+            <Books size={32} color="var(--color-primary)" weight="bold" />
+            <span className="text-[var(--color-primary)] font-extrabold text-2xl tracking-tight">
+              Gabarita.AI
             </span>
           </div>
 
-          <nav className="flex items-center gap-3">
+          <nav className="flex items-center gap-4">
             <Show when="signed-out">
               <Link
                 href="/sign-in"
-                style={{
-                  color: "rgba(255,255,255,0.85)",
-                  textDecoration: "none",
-                  fontSize: "var(--font-size-sm)",
-                  fontWeight: 500,
-                  padding: "8px 16px",
-                  borderRadius: "var(--radius-sm)",
-                  transition: "background var(--transition-fast)",
-                }}
+                className="flex items-center gap-2 bg-[#1351b4] text-white font-bold px-6 py-2.5 rounded-full hover:bg-[#0c326f] transition-colors shadow-sm"
               >
-                Entrar
-              </Link>
-              <Link
-                href="/sign-up"
-                style={{
-                  color: "var(--color-primary)",
-                  backgroundColor: "white",
-                  textDecoration: "none",
-                  fontSize: "var(--font-size-sm)",
-                  fontWeight: 600,
-                  padding: "8px 20px",
-                  borderRadius: "var(--radius-sm)",
-                  transition: "opacity var(--transition-fast)",
-                }}
-              >
-                Criar conta
+                <User size={20} weight="bold" />
+                Entrar no sistema
               </Link>
             </Show>
             <Show when="signed-in">
               <Link
                 href="/dashboard"
-                style={{
-                  color: "white",
-                  backgroundColor: "rgba(255,255,255,0.15)",
-                  textDecoration: "none",
-                  fontSize: "var(--font-size-sm)",
-                  fontWeight: 600,
-                  padding: "8px 20px",
-                  borderRadius: "var(--radius-sm)",
-                }}
+                className="flex items-center gap-2 bg-[#1351b4] text-white font-bold px-6 py-2.5 rounded-full hover:bg-[#0c326f] transition-colors shadow-sm"
               >
-                Ir ao Dashboard
+                <User size={20} weight="bold" />
+                Acessar Painel
               </Link>
             </Show>
           </nav>
         </div>
       </header>
 
-      {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <main className="flex-1">
-        <section
-          style={{
-            background:
-              "linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, var(--color-primary-light) 100%)",
-            padding: "80px 0 96px",
-          }}
-        >
-          <div className="gov-container text-center">
-            <div
-              className="animate-fade-in"
-              style={{ maxWidth: 720, margin: "0 auto" }}
-            >
-              <span
-                style={{
-                  display: "inline-block",
-                  backgroundColor: "rgba(255,255,255,0.15)",
-                  color: "rgba(255,255,255,0.9)",
-                  fontSize: "var(--font-size-sm)",
-                  fontWeight: 600,
-                  padding: "6px 16px",
-                  borderRadius: "var(--radius-full)",
-                  marginBottom: 24,
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                }}
-              >
-                ✦ Powered by IA
-              </span>
+      {/* ── Hero Banner ────────────────────────────────────────────────────── */}
+      <main className="flex-1 bg-white">
+        <section className="bg-[#1351b4] text-white relative overflow-hidden">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 py-16 md:py-24 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Coluna de Texto */}
+              <div className="max-w-[600px]">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.1] tracking-tight">
+                  Plataforma Inteligente de Estudos para Concursos
+                </h1>
+                <p className="text-lg md:text-xl opacity-90 mb-10 leading-relaxed font-medium">
+                  Acesse questões focadas na sua banca, valide seus conhecimentos
+                  com correção automática e tire dúvidas diretamente com a nossa
+                  Inteligência Artificial.
+                </p>
 
-              <h1
-                style={{
-                  color: "white",
-                  fontSize: "clamp(2rem, 5vw, 3.25rem)",
-                  fontWeight: 800,
-                  lineHeight: 1.15,
-                  marginBottom: 24,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                Prepare-se para concursos
-                <br />
-                <span
-                  style={{
-                    color: "#ffcd07",
-                  }}
-                >
-                  com inteligência artificial
-                </span>
-              </h1>
+                <div className="flex flex-wrap gap-4">
+                  <Show when="signed-out">
+                    <Link
+                      href="/sign-up"
+                      className="inline-flex items-center justify-center gap-2 bg-[#168821] text-white font-bold text-lg px-8 py-4 rounded-full hover:bg-[#126b1a] transition-colors shadow-lg"
+                    >
+                      Começar agora
+                      <ArrowRight size={20} weight="bold" />
+                    </Link>
+                  </Show>
+                  <Show when="signed-in">
+                    <Link
+                      href="/praticar"
+                      className="inline-flex items-center justify-center gap-2 bg-[#168821] text-white font-bold text-lg px-8 py-4 rounded-full hover:bg-[#126b1a] transition-colors shadow-lg"
+                    >
+                      Gerar Caderno de Questões
+                      <ArrowRight size={20} weight="bold" />
+                    </Link>
+                  </Show>
+                </div>
+              </div>
 
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.85)",
-                  fontSize: "var(--font-size-lg)",
-                  lineHeight: 1.7,
-                  marginBottom: 40,
-                }}
-              >
-                Gere questões personalizadas por matéria e banca, resolva com
-                correção imediata e tire dúvidas com um tutor IA disponível
-                24/7. Tudo adaptado ao seu concurso-alvo.
-              </p>
+              {/* Coluna Visual (Card de Questão Mockado) */}
+              <div className="hidden lg:block relative select-none">
+                <div className="absolute inset-0 bg-white/10 rounded-3xl transform rotate-3 scale-105"></div>
+                <div className="bg-white text-gray-800 rounded-3xl p-8 shadow-2xl relative transform -rotate-1 hover:rotate-0 transition-transform duration-500">
+                  <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
+                    <span className="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                      CEBRASPE • Direito Constitucional
+                    </span>
+                    <span className="text-gray-400 font-bold text-sm">
+                      Questão 1
+                    </span>
+                  </div>
+                  <p className="text-lg font-semibold leading-relaxed mb-8 text-gray-700">
+                    Julgue o item: A Constituição Federal de 1988 pode ser
+                    classificada como promulgada, rígida e analítica.
+                  </p>
+                  <div className="flex gap-4 mb-6">
+                    <div className="flex-1 bg-green-50 border-2 border-green-500 text-green-700 font-bold text-center py-3 rounded-xl flex items-center justify-center gap-2 cursor-default">
+                      <CheckCircle size={24} weight="fill" />
+                      Certo
+                    </div>
+                    <div className="flex-1 bg-gray-50 border-2 border-gray-200 text-gray-400 font-bold text-center py-3 rounded-xl flex items-center justify-center gap-2 cursor-default">
+                      Errado
+                    </div>
+                  </div>
 
-              <div
-                style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}
-              >
-                <Show when="signed-out">
-                  <Link
-                    href="/sign-up"
-                    style={{
-                      backgroundColor: "#ffcd07",
-                      color: "#1b1b1b",
-                      fontWeight: 700,
-                      fontSize: "var(--font-size-base)",
-                      padding: "14px 32px",
-                      borderRadius: "var(--radius-sm)",
-                      textDecoration: "none",
-                      transition: "transform var(--transition-fast), box-shadow var(--transition-fast)",
-                      boxShadow: "0 4px 16px rgba(255,205,7,0.35)",
-                    }}
-                  >
-                    Começar gratuitamente →
-                  </Link>
-                  <Link
-                    href="/sign-in"
-                    style={{
-                      color: "white",
-                      border: "2px solid rgba(255,255,255,0.4)",
-                      fontWeight: 600,
-                      fontSize: "var(--font-size-base)",
-                      padding: "14px 32px",
-                      borderRadius: "var(--radius-sm)",
-                      textDecoration: "none",
-                    }}
-                  >
-                    Já tenho conta
-                  </Link>
-                </Show>
-                <Show when="signed-in">
-                  <Link
-                    href="/dashboard"
-                    style={{
-                      backgroundColor: "#ffcd07",
-                      color: "#1b1b1b",
-                      fontWeight: 700,
-                      fontSize: "var(--font-size-base)",
-                      padding: "14px 32px",
-                      borderRadius: "var(--radius-sm)",
-                      textDecoration: "none",
-                    }}
-                  >
-                    Acessar meu Dashboard →
-                  </Link>
-                </Show>
+                  <div className="bg-blue-50/80 border border-blue-100 rounded-xl p-4 flex gap-4">
+                    <div className="text-[#1351b4] mt-1 shrink-0">
+                      <Robot size={28} weight="duotone" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-[#1351b4] font-bold mb-1">
+                        Feedback do Tutor IA
+                      </p>
+                      <p className="text-sm text-gray-600 leading-relaxed font-medium">
+                        Exatamente! Ela é <strong className="text-gray-800">promulgada</strong> pois
+                        derivou de uma Constituinte, <strong className="text-gray-800">rígida</strong> por
+                        exigir processo mais árduo, e <strong className="text-gray-800">analítica</strong> pois
+                        desce a minúcias.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── Funcionalidades ─────────────────────────────────────────────── */}
-        <section
-          style={{
-            backgroundColor: "var(--color-surface)",
-            padding: "80px 0",
-          }}
-        >
-          <div className="gov-container">
-            <h2
-              style={{
-                textAlign: "center",
-                fontSize: "var(--font-size-2xl)",
-                fontWeight: 700,
-                marginBottom: 12,
-                color: "var(--color-text-primary)",
-              }}
-            >
-              Tudo que você precisa para passar
+        {/* ── Funcionalidades (Serviços) ────────────────────────────────────── */}
+        <section className="bg-[#f8f9fa] py-16 border-b border-gray-200">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8 border-b-2 border-gray-200 pb-4">
+              Serviços e Funcionalidades
             </h2>
-            <p
-              style={{
-                textAlign: "center",
-                color: "var(--color-text-muted)",
-                marginBottom: 56,
-                fontSize: "var(--font-size-lg)",
-              }}
-            >
-              Do zero à aprovação com suporte de IA em cada etapa
-            </p>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                gap: 24,
-              }}
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((feature) => (
                 <FeatureCard key={feature.title} {...feature} />
               ))}
@@ -256,154 +159,47 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ── Bancas suportadas ───────────────────────────────────────────── */}
-        <section
-          style={{
-            backgroundColor: "var(--color-background)",
-            padding: "60px 0",
-          }}
-        >
-          <div className="gov-container text-center">
-            <p
-              style={{
-                color: "var(--color-text-muted)",
-                fontSize: "var(--font-size-sm)",
-                fontWeight: 600,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                marginBottom: 24,
-              }}
-            >
-              Bancas suportadas
-            </p>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 12,
-                justifyContent: "center",
-              }}
-            >
-              {["CEBRASPE", "FGV", "FCC", "VUNESP", "IBFC"].map((banca) => (
-                <span
+        {/* ── Instituições ─────────────────────────────────────────────────── */}
+        <section className="py-16">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 text-center">
+            <h2 className="text-2xl font-bold text-gray-800 mb-8">
+              Bancas Suportadas
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              {[
+                "CEBRASPE",
+                "FGV",
+                "FCC",
+                "VUNESP",
+                "IBFC",
+                "AOCP",
+                "CONSULPLAN",
+              ].map((banca) => (
+                <div
                   key={banca}
-                  style={{
-                    padding: "8px 20px",
-                    borderRadius: "var(--radius-full)",
-                    border: "2px solid var(--color-border)",
-                    fontSize: "var(--font-size-sm)",
-                    fontWeight: 700,
-                    color: "var(--color-text-secondary)",
-                    backgroundColor: "var(--color-surface)",
-                    letterSpacing: "0.03em",
-                  }}
+                  className="px-6 py-3 border border-gray-300 rounded text-gray-600 font-bold bg-white shadow-sm"
                 >
                   {banca}
-                </span>
+                </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ── CTA Final ───────────────────────────────────────────────────── */}
-        <section
-          style={{
-            backgroundColor: "var(--color-primary)",
-            padding: "72px 0",
-          }}
-        >
-          <div className="gov-container text-center">
-            <h2
-              style={{
-                color: "white",
-                fontSize: "var(--font-size-2xl)",
-                fontWeight: 700,
-                marginBottom: 16,
-              }}
-            >
-              Comece a estudar agora mesmo
-            </h2>
-            <p
-              style={{
-                color: "rgba(255,255,255,0.8)",
-                marginBottom: 40,
-                fontSize: "var(--font-size-lg)",
-              }}
-            >
-              Crie sua conta gratuita e gere sua primeira sessão de questões em
-              menos de 1 minuto.
-            </p>
-            <Show when="signed-out">
-              <Link
-                href="/sign-up"
-                style={{
-                  display: "inline-block",
-                  backgroundColor: "white",
-                  color: "var(--color-primary)",
-                  fontWeight: 700,
-                  fontSize: "var(--font-size-base)",
-                  padding: "14px 40px",
-                  borderRadius: "var(--radius-sm)",
-                  textDecoration: "none",
-                  boxShadow: "var(--shadow-lg)",
-                }}
-              >
-                Criar conta grátis
-              </Link>
-            </Show>
-            <Show when="signed-in">
-              <Link
-                href="/praticar"
-                style={{
-                  display: "inline-block",
-                  backgroundColor: "white",
-                  color: "var(--color-primary)",
-                  fontWeight: 700,
-                  fontSize: "var(--font-size-base)",
-                  padding: "14px 40px",
-                  borderRadius: "var(--radius-sm)",
-                  textDecoration: "none",
-                }}
-              >
-                Gerar questões agora
-              </Link>
-            </Show>
           </div>
         </section>
       </main>
 
       {/* ── Footer ─────────────────────────────────────────────────────────── */}
-      <footer
-        style={{
-          backgroundColor: "var(--color-primary-dark)",
-          padding: "32px 0",
-        }}
-      >
-        <div className="gov-container">
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 16,
-            }}
-          >
-            <p
-              style={{
-                color: "rgba(255,255,255,0.6)",
-                fontSize: "var(--font-size-sm)",
-              }}
-            >
-              © {new Date().getFullYear()} Tutor de Concursos. Projeto de portfólio.
-            </p>
-            <p
-              style={{
-                color: "rgba(255,255,255,0.5)",
-                fontSize: "var(--font-size-xs)",
-              }}
-            >
-              ⚠️ Questões geradas por IA podem conter erros. Confira sempre a legislação oficial.
+      <footer className="bg-[#0c326f] text-white pt-12 pb-6 border-t-[8px] border-[var(--color-success)]">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8 border-b border-white/20 pb-8">
+            <div className="flex items-center gap-3">
+              <Books size={40} color="white" weight="bold" />
+              <span className="font-bold text-2xl">tutor de concursos</span>
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row justify-between text-sm opacity-80 gap-4">
+            <p>Projeto de uso educacional e demonstração.</p>
+            <p>
+              Aviso: Respostas geradas por IA. Consulte fontes oficiais.
             </p>
           </div>
         </div>
@@ -421,52 +217,19 @@ function FeatureCard({
   title,
   description,
 }: {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
 }) {
   return (
-    <div
-      className="transition-all duration-200 hover:shadow-lg hover:-translate-y-1 cursor-default"
-      style={{
-        backgroundColor: "var(--color-surface)",
-        border: "1px solid var(--color-border)",
-        borderRadius: "var(--radius-md)",
-        padding: "28px 24px",
-      }}
-    >
-      <div
-        style={{
-          width: 48,
-          height: 48,
-          borderRadius: "var(--radius-md)",
-          backgroundColor: "var(--color-primary-lighter)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "1.5rem",
-          marginBottom: 16,
-        }}
-      >
+    <div className="bg-white border border-gray-200 rounded p-6 shadow-sm hover:shadow-md transition-shadow group cursor-default flex flex-col h-full">
+      <div className="mb-4 text-[var(--color-primary)] group-hover:scale-110 transition-transform origin-left w-max">
         {icon}
       </div>
-      <h3
-        style={{
-          fontWeight: 700,
-          fontSize: "var(--font-size-lg)",
-          marginBottom: 8,
-          color: "var(--color-text-primary)",
-        }}
-      >
+      <h3 className="font-bold text-lg text-gray-800 mb-2 group-hover:text-[var(--color-primary)] transition-colors">
         {title}
       </h3>
-      <p
-        style={{
-          color: "var(--color-text-muted)",
-          fontSize: "var(--font-size-sm)",
-          lineHeight: 1.6,
-        }}
-      >
+      <p className="text-gray-600 text-sm leading-relaxed flex-1">
         {description}
       </p>
     </div>
@@ -479,39 +242,39 @@ function FeatureCard({
 
 const features = [
   {
-    icon: "🎯",
-    title: "Questões por banca",
+    icon: <Target size={32} weight="duotone" />,
+    title: "Questões por instituição",
     description:
-      "CEBRASPE (Certo/Errado), FGV, FCC, VUNESP e outras. Cada banca tem seu estilo e a IA sabe a diferença.",
+      "Suporte às principais bancas organizadoras. O sistema adapta o formato das questões automaticamente.",
   },
   {
-    icon: "✅",
+    icon: <CheckCircle size={32} weight="duotone" />,
     title: "Correção imediata",
     description:
-      "Confirme sua resposta e veja na hora se acertou, qual era o gabarito e uma explicação detalhada.",
+      "Verifique sua resposta instantaneamente, com acesso ao gabarito oficial e explicação detalhada da resolução.",
   },
   {
-    icon: "🤖",
-    title: "Tutor com IA",
+    icon: <Robot size={32} weight="duotone" />,
+    title: "Suporte Especializado",
     description:
-      "Não entendeu? Abra o chat com o tutor direto da questão e tire todas as suas dúvidas com streaming em tempo real.",
+      "Tire dúvidas sobre a questão através de um chat integrado com Inteligência Artificial, disponível 24 horas por dia.",
   },
   {
-    icon: "📊",
-    title: "Dashboard de evolução",
+    icon: <ChartLineUp size={32} weight="duotone" />,
+    title: "Painel de Desempenho",
     description:
-      "Acompanhe sua taxa de acerto por matéria, evolução diária e histórico de sessões.",
+      "Acompanhe suas estatísticas de acertos por disciplina, histórico de resoluções e evolução geral do seu estudo.",
   },
   {
-    icon: "⚙️",
-    title: "Personalizado para você",
+    icon: <Faders size={32} weight="duotone" />,
+    title: "Filtros Personalizados",
     description:
-      "Configure seu concurso-alvo, banca e matérias de interesse. As questões são geradas sob medida.",
+      "Configure cadernos de questões específicos informando o concurso desejado, a banca organizadora e as disciplinas.",
   },
   {
-    icon: "🚩",
-    title: "Reporte problemas",
+    icon: <WarningCircle size={32} weight="duotone" />,
+    title: "Reporte de Inconsistências",
     description:
-      "IA pode errar. Sinalize questões com problemas para manter a qualidade do seu estudo.",
+      "Sinalize questões com falhas estruturais ou gabaritos desatualizados para manter a qualidade da base de dados.",
   },
 ];

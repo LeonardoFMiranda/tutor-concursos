@@ -1,11 +1,28 @@
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { db } from "@/lib/db";
 
 // ---------------------------------------------------------------------------
 // Layout das rotas protegidas — tem navbar no topo
 // ---------------------------------------------------------------------------
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
+  const profile = await db.profile.findUnique({
+    where: { userId },
+  });
+
+  if (!profile) {
+    redirect("/onboarding");
+  }
+
   return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
       <Navbar />
