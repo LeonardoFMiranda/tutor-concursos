@@ -123,13 +123,13 @@ Antes de começar a Fase 0, liste os arquivos que pretende criar e as dúvidas q
 - [x] Botão "Não entendi" que abre o tutor com a questão como contexto
 
 ### Fase 5: Tutor
-- [ ] Route Handler `/api/chat` com `streamText`
-- [ ] System prompt do tutor
-- [ ] Hook `useChat` na UI com streaming
-- [ ] Salvar `Conversation` e `Message` no banco
-- [ ] Sidebar com lista de conversas e rota `/tutor/[conversationId]`
-- [ ] Injetar contexto da questão quando a conversa vier de uma questão
-- [ ] Renderizar Markdown nas respostas
+- [x] Route Handler `/api/chat` com `streamText`
+- [x] System prompt do tutor
+- [x] Hook `useChat` na UI com streaming
+- [x] Salvar `Conversation` e `Message` no banco
+- [x] Sidebar com lista de conversas e rota `/tutor/[conversationId]`
+- [x] Injetar contexto da questão quando a conversa vier de uma questão
+- [x] Renderizar Markdown nas respostas
 
 ### Fase 6: Dashboard
 - [ ] Query: taxa de acerto geral e por matéria

@@ -16,6 +16,7 @@
   "dependencies": {
     "@ai-sdk/groq": "^4.0.46",
     "@ai-sdk/openai": "^4.0.71",
+    "@ai-sdk/react": "^4.0.110",
     "@clerk/nextjs": "^7.9.4",
     "@phosphor-icons/react": "^2.1.10",
     "@prisma/client": "^5.22.0",
