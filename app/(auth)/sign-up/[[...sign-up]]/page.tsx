@@ -1,0 +1,70 @@
+import { SignUp } from "@clerk/nextjs";
+
+export default function SignUpPage() {
+  return (
+    <main
+      style={{
+        minHeight: "100dvh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "var(--color-background)",
+        padding: "var(--space-4)",
+      }}
+    >
+      <div style={{ width: "100%", maxWidth: 480 }}>
+        {/* Logo / branding */}
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <div
+            style={{
+              width: 56,
+              height: 56,
+              borderRadius: "var(--radius-md)",
+              backgroundColor: "var(--color-primary)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto 16px",
+              fontSize: "1.75rem",
+            }}
+          >
+            📋
+          </div>
+          <h1
+            style={{
+              fontSize: "var(--font-size-2xl)",
+              fontWeight: 700,
+              color: "var(--color-text-primary)",
+              marginBottom: 6,
+            }}
+          >
+            Criar sua conta
+          </h1>
+          <p style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-sm)" }}>
+            Comece a se preparar para concursos com IA
+          </p>
+        </div>
+
+        <SignUp
+          appearance={{
+            elements: {
+              card: {
+                boxShadow: "var(--shadow-md)",
+                borderRadius: "var(--radius-md)",
+                border: "1px solid var(--color-border)",
+              },
+              primaryButton: {
+                backgroundColor: "var(--color-primary)",
+                borderRadius: "var(--radius-sm)",
+                fontWeight: 600,
+              },
+              formButtonPrimary: {
+                backgroundColor: "var(--color-primary)",
+              },
+            },
+          }}
+        />
+      </div>
+    </main>
+  );
+}

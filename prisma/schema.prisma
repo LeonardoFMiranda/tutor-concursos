@@ -1,0 +1,144 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum Banca {
+  CEBRASPE
+  FGV
+  FCC
+  VUNESP
+  IBFC
+  OUTRA
+}
+
+enum Difficulty {
+  FACIL
+  MEDIO
+  DIFICIL
+}
+
+enum QuestionStyle {
+  MULTIPLE_CHOICE
+  CERTO_ERRADO
+}
+
+enum MessageRole {
+  user
+  assistant
+  system
+}
+
+// ---------------------------------------------------------------------------
+// Models
+// ---------------------------------------------------------------------------
+
+/// Perfil do candidato — criado no onboarding, 1:1 com userId do Clerk
+model Profile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  targetExam  String
+  banca       Banca
+  subjects    String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+}
+
+/// Sessão de prática — agrupa as questões geradas em uma rodada
+model PracticeSession {
+  id         String     @id @default(cuid())
+  userId     String
+  subject    String
+  topic      String?
+  banca      Banca
+  difficulty Difficulty
+  createdAt  DateTime   @default(now())
+
+  questions  Question[]
+
+  @@index([userId])
+  @@index([userId, createdAt])
+}
+
+/// Questão gerada pela IA — pertence a uma PracticeSession
+model Question {
+  id            String        @id @default(cuid())
+  sessionId     String
+  subject       String
+  topic         String?
+  banca         Banca
+  style         QuestionStyle
+  statement     String        @db.Text
+  /// Para MULTIPLE_CHOICE: [{ key: "A", text: "..." }, ...] (5 opções)
+  /// Para CERTO_ERRADO: [] (resposta é "CERTO" ou "ERRADO")
+  options       Json
+  correctAnswer String        /// "A"|"B"|"C"|"D"|"E" ou "CERTO"|"ERRADO"
+  explanation   String        @db.Text
+  difficulty    Difficulty
+  reported      Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+
+  session       PracticeSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  attempts      Attempt[]
+
+  @@index([sessionId])
+  @@index([subject])
+}
+
+/// Tentativa de resposta de um usuário a uma questão
+model Attempt {
+  id             String   @id @default(cuid())
+  userId         String
+  questionId     String
+  selectedAnswer String
+  isCorrect      Boolean
+  createdAt      DateTime @default(now())
+
+  question       Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@index([questionId])
+}
+
+/// Conversa com o tutor de IA
+model Conversation {
+  id         String   @id @default(cuid())
+  userId     String
+  questionId String?  /// Quando iniciada a partir de uma questão
+  title      String   @default("Nova conversa")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  messages   Message[]
+
+  @@index([userId])
+  @@index([userId, updatedAt])
+}
+
+/// Mensagem em uma conversa com o tutor
+model Message {
+  id             String      @id @default(cuid())
+  conversationId String
+  role           MessageRole
+  content        String      @db.Text
+  createdAt      DateTime    @default(now())
+
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+}
