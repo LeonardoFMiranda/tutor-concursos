@@ -57,6 +57,7 @@ export default async function PracticeSessionPage({
     <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6">
       {!isFinished ? (
         <QuestionView
+          key={session.questions[currentQuestionIndex].id}
           question={session.questions[currentQuestionIndex]}
           currentIndex={currentQuestionIndex + 1}
           totalQuestions={totalQuestions}
