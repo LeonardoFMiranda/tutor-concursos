@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { ChatCircleText, PlusCircle } from "@phosphor-icons/react/dist/ssr";
+import DeleteConversationButton from "./delete-conversation-button";
 
 export const metadata = {
   title: "Tutor IA | Tutor de Concursos",
@@ -45,14 +46,18 @@ export default async function TutorLayout({
           ) : (
             <div className="space-y-1">
               {conversations.map((conv) => (
-                <Link
-                  key={conv.id}
-                  href={`/tutor/${conv.id}`}
-                  className="flex items-center gap-3 p-3 rounded text-sm text-gray-700 hover:bg-gray-200 transition-colors truncate w-full"
-                >
-                  <ChatCircleText size={18} className="flex-shrink-0 text-gray-500" />
-                  <span className="truncate">{conv.title}</span>
-                </Link>
+                <div key={conv.id} className="group relative flex items-center justify-between rounded hover:bg-gray-200 transition-colors w-full">
+                  <Link
+                    href={`/tutor/${conv.id}`}
+                    className="flex-1 flex items-center gap-3 p-3 text-sm text-gray-700 truncate min-w-0"
+                  >
+                    <ChatCircleText size={18} className="flex-shrink-0 text-gray-500" />
+                    <span className="truncate">{conv.title}</span>
+                  </Link>
+                  <div className="absolute right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <DeleteConversationButton id={conv.id} />
+                  </div>
+                </div>
               ))}
             </div>
           )}
