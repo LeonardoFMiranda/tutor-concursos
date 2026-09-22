@@ -1,7 +1,6 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 
 export async function submitAnswerAction(questionId: string, selectedAnswer: string) {
@@ -31,7 +30,9 @@ export async function submitAnswerAction(questionId: string, selectedAnswer: str
       },
     });
 
-    revalidatePath(`/praticar/${question.sessionId}`);
+    // Não revalidar aqui — o router.refresh() no cliente
+    // faz isso somente quando o usuário clica em "Próxima Questão",
+    // evitando re-render imediato que apaga o state do componente.
 
     return { success: true, isCorrect };
   } catch (error: any) {
