@@ -1,5 +1,5 @@
 import { getAIModel } from "@/lib/ai/providers";
-import { streamText } from "ai";
+import { streamText, convertToModelMessages } from "ai";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 import { MessageRole } from "@prisma/client";
@@ -56,8 +56,12 @@ ${questionContext}
   // Cria a conversa no banco antes do stream se não existir
   let isNewConversation = false;
   if (!conversationId) {
-    const newTitle = messages[0]?.content
-      ? messages[0].content.substring(0, 40) + "..."
+    const firstMessageContent = typeof messages[0]?.content === "string" 
+      ? messages[0].content 
+      : messages[0]?.parts?.[0]?.text || "";
+    
+    const newTitle = firstMessageContent
+      ? firstMessageContent.substring(0, 40) + (firstMessageContent.length > 40 ? "..." : "")
       : "Nova Conversa";
 
     const conversation = await db.conversation.create({
@@ -76,10 +80,13 @@ ${questionContext}
   // Pegamos a última mensagem do usuário para salvar
   const lastUserMessage = messages[messages.length - 1];
 
+  // Converte as mensagens do UI para o formato esperado pelo modelo
+  const modelMessages = await convertToModelMessages(messages);
+
   const result = streamText({
     model,
     system: systemPrompt,
-    messages,
+    messages: modelMessages,
     async onFinish({ text }) {
       if (conversationId) {
         // Salva a mensagem do usuário
@@ -87,7 +94,9 @@ ${questionContext}
           data: {
             conversationId,
             role: MessageRole.user,
-            content: lastUserMessage.content,
+            content: typeof lastUserMessage.content === "string" 
+              ? lastUserMessage.content 
+              : lastUserMessage.parts?.[0]?.text || "",
           },
         });
 
