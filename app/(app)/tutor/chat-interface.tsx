@@ -28,6 +28,11 @@ export default function ChatInterface({
   const { messages, status, sendMessage } = useChat({
     id: initialConversationId ?? "new-chat",
     messages: initialMessages,
+    onFinish: () => {
+      // Atualiza a sidebar (histórico) apenas quando o streaming termina, 
+      // para não travar a UI durante a resposta
+      router.refresh();
+    },
     transport: new DefaultChatTransport({
       api: "/api/chat",
       body: {
@@ -41,7 +46,7 @@ export default function ChatInterface({
         const newConversationId = response.headers.get("x-conversation-id");
         if (newConversationId && !initialConversationId) {
           window.history.replaceState(null, "", `/tutor/${newConversationId}`);
-          router.refresh();
+          // Não chamar router.refresh() aqui, pois trava o streaming inicial
         }
         return response;
       },

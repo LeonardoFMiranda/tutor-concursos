@@ -56,8 +56,12 @@ ${questionContext}
   // Cria a conversa no banco antes do stream se não existir
   let isNewConversation = false;
   if (!conversationId) {
-    const newTitle = messages[0]?.content
-      ? messages[0].content.substring(0, 40) + "..."
+    const firstMessageContent = typeof messages[0]?.content === "string" 
+      ? messages[0].content 
+      : messages[0]?.parts?.[0]?.text || "";
+    
+    const newTitle = firstMessageContent
+      ? firstMessageContent.substring(0, 40) + (firstMessageContent.length > 40 ? "..." : "")
       : "Nova Conversa";
 
     const conversation = await db.conversation.create({
