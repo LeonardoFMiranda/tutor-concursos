@@ -3,6 +3,7 @@ import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
+import { ChartBar, Target, Robot, UserCircle, Books } from "@phosphor-icons/react/dist/ssr";
 
 // ---------------------------------------------------------------------------
 // Layout das rotas protegidas — tem navbar no topo
@@ -96,7 +97,7 @@ function Navbar() {
               fontSize: "1.1rem",
             }}
           >
-            📋
+            <Books size={20} weight="duotone" />
           </span>
           <span
             style={{
@@ -168,8 +169,8 @@ function Navbar() {
 }
 
 const navLinks = [
-  { href: "/dashboard", icon: "📊", label: "Dashboard" },
-  { href: "/praticar",  icon: "🎯", label: "Praticar"  },
-  { href: "/tutor",     icon: "🤖", label: "Tutor"     },
-  { href: "/perfil",    icon: "👤", label: "Perfil"    },
+  { href: "/dashboard", icon: <ChartBar size={20} weight="bold" />, label: "Dashboard" },
+  { href: "/praticar",  icon: <Target size={20} weight="bold" />, label: "Praticar"  },
+  { href: "/tutor",     icon: <Robot size={20} weight="bold" />, label: "Tutor"     },
+  { href: "/perfil",    icon: <UserCircle size={20} weight="bold" />, label: "Perfil"    },
 ];

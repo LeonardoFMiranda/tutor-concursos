@@ -1,4 +1,5 @@
 import { SignIn } from "@clerk/nextjs";
+import { Books } from "@phosphor-icons/react/dist/ssr";
 
 export default function SignInPage() {
   return (
@@ -28,7 +29,7 @@ export default function SignInPage() {
               fontSize: "1.75rem",
             }}
           >
-            📋
+            <Books size={32} weight="duotone" color="white" />
           </div>
           <h1
             style={{
