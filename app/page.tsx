@@ -15,15 +15,7 @@ import {
 export default function LandingPage() {
   return (
     <div className="min-h-dvh flex flex-col font-sans text-gray-800">
-      {/* ── Barra Brasil (Placeholder) ─────────────────────────────────────── */}
-      <div className="bg-[#f2f2f2] border-b border-[#e6e6e6] text-[#333] text-xs font-bold py-1 px-4 sm:px-8">
-        <div className="max-w-[1200px] mx-auto flex justify-between items-center">
-          <span>BRASIL</span>
-          <span className="hidden sm:inline">
-            Acesso à informação | Participe | Legislação | Órgãos do Governo
-          </span>
-        </div>
-      </div>
+
 
       {/* ── Header Principal ───────────────────────────────────────────────── */}
       <header className="bg-white border-b border-gray-200">

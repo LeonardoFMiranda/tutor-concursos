@@ -43,12 +43,7 @@ export default function OnboardingPage() {
 
   return (
     <div className="min-h-dvh bg-[var(--color-background)] flex flex-col font-sans">
-      {/* ── Barra Brasil (Placeholder) ─────────────────────────────────────── */}
-      <div className="bg-[#f2f2f2] border-b border-[#e6e6e6] text-[#333] text-xs font-bold py-1 px-4 sm:px-8">
-        <div className="max-w-[1200px] mx-auto flex justify-between items-center">
-          <span>BRASIL</span>
-        </div>
-      </div>
+
 
       {/* ── Header Minimalista ─────────────────────────────────────────────── */}
       <header className="bg-white border-b border-gray-200">
