@@ -2,7 +2,7 @@
 
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, UIMessage } from "ai";
-import { PaperPlaneRight, Spinner, Student, Robot } from "@phosphor-icons/react";
+import { PaperPlaneRight, Spinner, Student, Robot, Warning } from "@phosphor-icons/react";
 import ReactMarkdown from "react-markdown";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
@@ -22,6 +22,8 @@ export default function ChatInterface({
   const router = useRouter();
   const bottomRef = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState("");
+
+  const [chatError, setChatError] = useState<string | null>(null);
 
   const { messages, status, sendMessage } = useChat({
     id: initialConversationId ?? "new-chat",
@@ -44,6 +46,10 @@ export default function ChatInterface({
         return response;
       },
     }),
+    onError: (error) => {
+      console.error("Erro no chat:", error);
+      setChatError("Não foi possível obter uma resposta do tutor. Verifique sua conexão ou tente novamente.");
+    },
   });
 
   const isLoading = status === "streaming" || status === "submitted";
@@ -55,7 +61,9 @@ export default function ChatInterface({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim()) return;
-    sendMessage({ parts: [{ type: "text", text: input }], role: "user" } as any);
+    setChatError(null);
+    // AI SDK v7: sendMessage aceita { text } ou { parts }
+    sendMessage({ text: input });
     setInput("");
   };
 
@@ -141,6 +149,15 @@ export default function ChatInterface({
             )}
 
             <div ref={bottomRef} />
+          </div>
+        )}
+
+        {chatError && (
+          <div className="max-w-3xl mx-auto mt-4">
+            <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
+              <Warning size={18} weight="fill" className="shrink-0" />
+              <span>{chatError}</span>
+            </div>
           </div>
         )}
       </div>
