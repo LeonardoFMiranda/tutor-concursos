@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Question } from "@prisma/client";
 import { submitAnswerAction, reportQuestionAction } from "./actions";
 import { CheckCircle, XCircle, Flag, Student, ArrowRight, Spinner } from "@phosphor-icons/react";
@@ -18,10 +19,12 @@ export default function QuestionView({
   currentIndex,
   totalQuestions,
 }: QuestionViewProps) {
+  const router = useRouter();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isReporting, setIsReporting] = useState(false);
-  
+  const [actionError, setActionError] = useState<string | null>(null);
+
   // Após responder
   const [hasAnswered, setHasAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -33,6 +36,7 @@ export default function QuestionView({
     if (!selectedOption || hasAnswered || isSubmitting) return;
 
     setIsSubmitting(true);
+    setActionError(null);
     const result = await submitAnswerAction(question.id, selectedOption);
     setIsSubmitting(false);
 
@@ -40,22 +44,34 @@ export default function QuestionView({
       setHasAnswered(true);
       setIsCorrect(result.isCorrect || false);
     } else {
-      alert(result.error);
+      setActionError(result.error || "Falha ao salvar a resposta.");
     }
   }
 
   async function handleReport() {
     if (isReporting) return;
     setIsReporting(true);
+    setActionError(null);
     const result = await reportQuestionAction(question.id);
     setIsReporting(false);
-    if (result.success) {
-      alert("Questão reportada com sucesso. Nossa equipe revisará.");
+    if (!result.success) {
+      setActionError(result.error || "Falha ao reportar.");
     }
+  }
+
+  function handleNextQuestion() {
+    // router.refresh() revalida os Server Components sem reload de página inteira,
+    // evitando estados inconsistentes com auth e Error Boundary.
+    router.refresh();
   }
 
   return (
     <div className="bg-white border border-gray-200 rounded shadow-sm w-full">
+      {actionError && (
+        <div className="mx-4 mt-4 p-3 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm font-medium rounded">
+          {actionError}
+        </div>
+      )}
       {/* HEADER DA QUESTÃO */}
       <div className="bg-gray-50 border-b border-gray-200 p-4 sm:p-6 flex items-center justify-between">
         <div>
@@ -211,7 +227,7 @@ export default function QuestionView({
             </button>
           ) : (
             <button
-              onClick={() => window.location.reload()}
+              onClick={handleNextQuestion}
               className="w-full sm:w-auto bg-[var(--color-success)] text-white px-8 py-3 rounded font-bold hover:brightness-110 transition-colors flex items-center justify-center gap-2 min-w-[200px]"
             >
               Próxima Questão
